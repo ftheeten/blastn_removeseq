@@ -53,6 +53,7 @@ do
    blast_pattern_assoc[$row]=""
 done
 
+removed=0
 copy=1
 init=1
 while read line; do
@@ -66,6 +67,7 @@ while read line; do
 		if [[ -v "blast_pattern_assoc[$id]" ]] ; then
 			#echo "SET"
 			#echo $id
+			removed=$((removed+1))
 			copy=0
 			init=0
 		fi
@@ -73,7 +75,7 @@ while read line; do
 	if [ $copy -eq 1 ]
 	then
 		echo "$line" >> "$output"
-	else #copyy eq 0 (false)
+	else #copy eq 0 (false)
 		if [ $init -lt 4 ]
 		then
 			#echo "SKIP"
@@ -97,4 +99,5 @@ done < $subject
 now=$(date)
 rm $tempfa
 printf "temp_file %s removed\n" "$tempfa"
+printf "%s sequences removed\n" "$removed"
 printf "Finish $now \n"
