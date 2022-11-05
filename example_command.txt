@@ -1,0 +1,1 @@
+./blast_check_and_remove.sh -s /mnt/c/DEV/R/floris/fastq_200000_target.fq -q /mnt/c/DEV/R/floris/Custom_contamination_Database.fasta -w 100 -p 90 -o out_floris.fq -r reject.fq
