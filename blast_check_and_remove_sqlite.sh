@@ -58,7 +58,7 @@ awk '(NR-1)%4<2'  $subject | sed -e "s/^@/>/" > $tempfa
 blast_patterns=($(blastn -query $query -subject $tempfa -perc_identity $perc_identity -word_size $word_size -outfmt 6 | awk '{print $2}'))
 sqlite3 $tempsqlite "VACUUM;"
 sqlite3 $tempsqlite <<EOF
-create table seqs (id INTEGER PRIMARY KEY , seq text);
+create table seqs (id INTEGER PRIMARY KEY , seq text);CREATE INDEX idx_unq_seq ON seqs(seq);
 EOF
 printf "database created\n"
 printf "filling database\n"
